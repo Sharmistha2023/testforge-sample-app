@@ -1,0 +1,27 @@
+openapi: 3.0.3
+info:
+  title: Task Tracker API
+  version: 1.0.0
+paths:
+  /health:
+    get:
+      responses: { '200': { description: OK } }
+  /api/tasks:
+    get:
+      parameters:
+        - { name: status, in: query, schema: { type: string, enum: [open, done] } }
+      responses: { '200': { description: List of tasks } }
+    post:
+      responses: { '201': { description: Created } }
+  /api/tasks/{id}:
+    delete:
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses: { '204': { description: Deleted } }
+  # SEEDED: contract drift — documented but not implemented
+  /api/tasks/{id}/assign:
+    post:
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses: { '200': { description: Assigned } }
+  # SEEDED: /api/users/search, /api/files/{name}, /api/admin/* are implemented but undocumented

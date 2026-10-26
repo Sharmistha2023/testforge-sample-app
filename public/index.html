@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task Tracker</title>
+</head>
+<body>
+  <!-- SEEDED: accessibility issues — no lang, img without alt, unlabeled inputs, div used as button -->
+  <img src="logo.png">
+  <h3>Tasks</h3>
+  <form id="new-task">
+    <input type="text" id="title" placeholder="Task title">
+    <input type="number" id="estimate">
+    <div class="btn" onclick="addTask()">Add</div>
+  </form>
+  <ul id="tasks"></ul>
+  <script>
+    async function addTask() {
+      const title = document.getElementById('title').value;
+      await fetch('/api/tasks', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title }) });
+      document.getElementById('tasks').innerHTML += '<li>' + title + '</li>';
+    }
+  </script>
+</body>
+</html>
